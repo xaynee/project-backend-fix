@@ -51,4 +51,8 @@ public class MahasiswaHandler {
         mahasiswaTable.persist();
         return mahasiswaTable;
     }
+
+    public void deleteMahasiswa(long id){
+        MahasiswaTable.deleteById(id);
+    }
 }

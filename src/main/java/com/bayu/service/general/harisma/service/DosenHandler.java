@@ -49,4 +49,9 @@ public class DosenHandler {
         dosenTable.persist();
         return dosenTable;
     }
+
+
+    public void deleteDosen(long id){
+        DosenTable.deleteById(id);
+    }
 }

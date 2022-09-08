@@ -49,4 +49,8 @@ public class MatakuliahHandler {
         return matkulTable;
     }
 
+    public void deleteMatakuliah(long id){
+        MatakuliahTable.deleteById(id);
+    }
+
 }

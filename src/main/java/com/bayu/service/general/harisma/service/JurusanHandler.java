@@ -47,4 +47,8 @@ public class JurusanHandler {
         jurusanTable.persist();
         return jurusanTable;
     }
+
+    public void deleteJurusan(long id){
+        JurusanTable.deleteById(id);
+    }
 }

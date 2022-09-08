@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
@@ -42,6 +43,13 @@ public class MatakuliahController {
     @Path("/create")
     public MatakuliahBody createMatkul(MatakuliahBody body) {
         return matakuliahHandler.createMatkulTable(body);
+    }
+
+    @GET
+    @Path("/delete/{id}")
+    @Transactional
+    public void deleteMatakuliah(@PathParam("id") long id){
+        matakuliahHandler.deleteMatakuliah(id);
     }
 
     
