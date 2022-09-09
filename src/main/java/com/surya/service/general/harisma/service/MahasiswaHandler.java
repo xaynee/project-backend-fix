@@ -1,20 +1,32 @@
 package com.surya.service.general.harisma.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 
+import com.surya.service.general.harisma.entity.JurusanTable;
 import com.surya.service.general.harisma.entity.MahasiswaTable;
 import com.surya.service.general.harisma.exception.DataNotFoundException;
 import com.surya.service.general.harisma.exception.ExceptionCode;
+import com.surya.service.general.harisma.exception.FormatException;
+import com.surya.service.general.harisma.model.body.JurusanBody;
 import com.surya.service.general.harisma.model.body.MahasiswaBody;
+import com.surya.service.general.harisma.model.form.MahasiswaAndJurusanForm;
 
 
 @ApplicationScoped
 public class MahasiswaHandler {
+
+    @Inject
+    JurusanHandler jurusanHandler;
+
+    private record MahasiswaAndJurusanTrupple(MahasiswaTable mahasiswa, JurusanTable jurusan){}
+    
     public List<MahasiswaBody> getMahasiswa(long id){
         return MahasiswaTable.findById(id)
             .stream()
@@ -45,6 +57,22 @@ public class MahasiswaHandler {
         return MahasiswaBody.fromMahasiswaTable(mahasiswaTable);
     }
 
+    public MahasiswaAndJurusanForm createMahasiswaAndJurusan(MahasiswaAndJurusanForm form) {
+        return Optional.of(form)
+           .map(f ->{
+            var jurusan = jurusanHandler.saveNewJurusanTable(f.getJurusan());
+            f.getMahasiswa().setIdJurusan(jurusan.idJurusan);
+            return new MahasiswaAndJurusanTrupple(saveNewMahasiswaTable(f.getMahasiswa()), jurusan);
+           })
+            .map(f -> {
+                MahasiswaAndJurusanForm data = new MahasiswaAndJurusanForm();
+                data.setJurusan(JurusanBody.fromJurusanTable(f.jurusan));
+                data.setMahasiswa(MahasiswaBody.fromMahasiswaTable(f.mahasiswa));
+                return data;
+            })
+            .orElseThrow(() -> new FormatException(ExceptionCode.F_NV));
+    }
+
     public MahasiswaTable saveNewMahasiswaTable(MahasiswaBody body){
         var mahasiswaTable = new MahasiswaTable();
         mahasiswaTable.idMahasiswa = body.getIdMahasiswa();
@@ -52,6 +80,7 @@ public class MahasiswaHandler {
         mahasiswaTable.jenisKelamin = body.getJenisKelamin();
         mahasiswaTable.noTelp = body.getNoTelp();
         mahasiswaTable.alamat = body.getAlamat();
+        mahasiswaTable.idJurusan = body.getIdJurusan();
         mahasiswaTable.persist();
         return mahasiswaTable;
     }

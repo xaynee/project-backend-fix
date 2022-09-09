@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 
 import com.surya.service.general.harisma.entity.MahasiswaTable;
 import com.surya.service.general.harisma.model.body.MahasiswaBody;
+import com.surya.service.general.harisma.model.form.MahasiswaAndJurusanForm;
 import com.surya.service.general.harisma.service.MahasiswaHandler;
 
 @Path("/api/v1/mahasiswa")
@@ -45,6 +46,13 @@ public class MahasiswaController {
     @Transactional
     public MahasiswaBody createMahasiswa(MahasiswaBody body){
         return mahasiswaHandler.createMahasiswaTable(body);
+    }
+
+    @POST
+    @Path("/create/with-jurusan")
+    @Transactional
+    public MahasiswaAndJurusanForm createMahasiswaAndJurusan(MahasiswaAndJurusanForm form){
+        return mahasiswaHandler.createMahasiswaAndJurusan(form);
     }
 
     @DELETE

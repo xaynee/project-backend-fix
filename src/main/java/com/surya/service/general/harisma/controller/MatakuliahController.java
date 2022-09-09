@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 
 import com.surya.service.general.harisma.entity.MatakuliahTable;
 import com.surya.service.general.harisma.model.body.MatakuliahBody;
+import com.surya.service.general.harisma.model.form.MatakuliahAndDosenForm;
 import com.surya.service.general.harisma.service.MatakuliahHandler;
 
 @Path("api/v1/matakuliah")
@@ -44,8 +45,15 @@ public class MatakuliahController {
     @POST
     @Path("/create")
     @Transactional
-    public MatakuliahBody createMatkul(MatakuliahBody body) {
+    public MatakuliahBody createMatakuliah(MatakuliahBody body) {
         return matakuliahHandler.createMatkulTable(body);
+    }
+
+    @POST
+    @Path("/create/with-dosen")
+    @Transactional
+    public MatakuliahAndDosenForm createMatakuliahAndDosenForm(MatakuliahAndDosenForm form){
+        return matakuliahHandler.createMatakuliahAndDosenForm(form);
     }
 
     @DELETE

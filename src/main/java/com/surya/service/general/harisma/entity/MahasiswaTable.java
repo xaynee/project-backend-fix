@@ -1,11 +1,11 @@
 package com.surya.service.general.harisma.entity;
 
-
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,6 +17,7 @@ public class MahasiswaTable extends PanacheEntityBase{
     
     @Id
 
+    @GeneratedValue(generator = "dimata_id_gen")
     @Column(name = "id_mahasiswa")
     public Long idMahasiswa;
 
@@ -31,6 +32,9 @@ public class MahasiswaTable extends PanacheEntityBase{
 
     @Column(name = "alamat")
     public String alamat;
+
+    @Column(name = "id_jurusan")
+    public Long idJurusan;
 
     public static Optional<MahasiswaTable> findById(long id){
         return find("id=?1", id).firstResultOptional();

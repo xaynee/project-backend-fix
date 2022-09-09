@@ -1,5 +1,6 @@
 package com.surya.service.general.harisma.model.body;
 
+
 import static com.surya.service.general.harisma.core.util.ManipulateUtil.changeItOrNot;
 
 import com.surya.service.general.harisma.entity.MahasiswaTable;
@@ -13,6 +14,7 @@ public class MahasiswaBody {
     private String jenisKelamin;
     private String noTelp;
     private String alamat;
+    private Long idJurusan;
 
     public static MahasiswaBody fromMahasiswaTable(MahasiswaTable ent){
         var output = new MahasiswaBody();
