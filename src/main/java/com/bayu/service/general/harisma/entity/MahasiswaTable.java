@@ -18,7 +18,7 @@ public class MahasiswaTable extends PanacheEntityBase{
     @Id
 
     @Column(name = "id_mahasiswa")
-    public Long id;
+    public Long idMahasiswa;
 
     @Column(name = "nama_mahasiswa")
     public String namaMahasiswa;
@@ -33,7 +33,7 @@ public class MahasiswaTable extends PanacheEntityBase{
     public String alamat;
 
     public static Optional<MahasiswaTable> findById(long id){
-        return find("id =?1,id").firstResultOptional();
+        return find("id=?1", id).firstResultOptional();
     }
 
     public static List<MahasiswaTable> getAllData(){

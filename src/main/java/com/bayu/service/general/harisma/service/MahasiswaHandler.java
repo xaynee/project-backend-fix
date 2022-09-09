@@ -43,7 +43,7 @@ public class MahasiswaHandler {
 
     public MahasiswaTable saveNewMahasiswaTable(MahasiswaBody body){
         var mahasiswaTable = new MahasiswaTable();
-        mahasiswaTable.id = body.getIdMahasiswa();
+        mahasiswaTable.idMahasiswa = body.getIdMahasiswa();
         mahasiswaTable.namaMahasiswa = body.getNamaMahasiswa();
         mahasiswaTable.jenisKelamin = body.getJenisKelamin();
         mahasiswaTable.noTelp = body.getNoTelp();

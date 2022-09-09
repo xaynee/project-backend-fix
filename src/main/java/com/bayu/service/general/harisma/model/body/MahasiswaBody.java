@@ -16,7 +16,7 @@ public class MahasiswaBody {
 
     public static MahasiswaBody fromMahasiswaTable(MahasiswaTable ent){
         var output = new MahasiswaBody();
-        output.setIdMahasiswa(ent.id);
+        output.setIdMahasiswa(ent.idMahasiswa);
         output.setNamaMahasiswa(ent.namaMahasiswa);
         output.setJenisKelamin(ent.jenisKelamin);
         output.setNoTelp(ent.noTelp);

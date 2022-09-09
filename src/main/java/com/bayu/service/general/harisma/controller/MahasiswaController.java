@@ -6,22 +6,22 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
-import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import com.bayu.service.general.harisma.entity.MahasiswaTable;
 import com.bayu.service.general.harisma.model.body.MahasiswaBody;
 import com.bayu.service.general.harisma.service.MahasiswaHandler;
 
-@Path("/api/v1/jadwal")
+@Path("/api/v1/mahasiswa")
 public class MahasiswaController {
     @Inject
     MahasiswaHandler mahasiswaHandler;
 
     @GET
-    public List<MahasiswaBody> getMahasiswa(@QueryParam long id){
+    @Path("/get-id/{id}")
+    public List<MahasiswaBody> getMahasiswa(@PathParam("id") long id){
         return mahasiswaHandler.getMahasiswa(id);
     }
 
@@ -39,8 +39,9 @@ public class MahasiswaController {
         return mahasiswaHandler.updateMahasiswaTable(body);
     }
 
-    @GET
+    @POST
     @Path("/create")
+    @Transactional
     public MahasiswaBody createMahasiswa(MahasiswaBody body){
         return mahasiswaHandler.createMahasiswaTable(body);
     }
@@ -51,4 +52,5 @@ public class MahasiswaController {
     public void deleteMahasiswa(@PathParam("id") long id){
         mahasiswaHandler.deleteMahasiswa(id);
     }
+
 }

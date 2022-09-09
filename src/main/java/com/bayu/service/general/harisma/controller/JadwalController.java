@@ -6,10 +6,10 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import com.bayu.service.general.harisma.entity.JadwalTable;
 import com.bayu.service.general.harisma.model.body.JadwalBody;
@@ -21,7 +21,8 @@ public class JadwalController {
     JadwalHandler jadwalHandler;
 
     @GET
-    public List<JadwalBody> getJadwal(@QueryParam long id){
+    @Path("/get/{id}")
+    public List<JadwalBody> getJadwal(@PathParam("id") long id){
         return jadwalHandler.getJadwal(id);
     }
 
@@ -39,8 +40,9 @@ public class JadwalController {
         return jadwalHandler.updateJadwalTable(body);
     }
 
-    @GET
+    @POST
     @Path("/create")
+    @Transactional
     public JadwalBody createJadwal(JadwalBody body){
         return jadwalHandler.createJadwalTable(body);
     }

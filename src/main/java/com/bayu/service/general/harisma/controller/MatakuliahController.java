@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import com.bayu.service.general.harisma.entity.MatakuliahTable;
 import com.bayu.service.general.harisma.model.body.MatakuliahBody;
@@ -20,13 +21,14 @@ public class MatakuliahController {
     MatakuliahHandler matakuliahHandler;
 
     @GET
-    public List<MatakuliahBody> getMatkul(@QueryParam long id) {
+    @Path("/get/{id}")
+    public List<MatakuliahBody> getMatkul(@PathParam("id") long id) {
         return matakuliahHandler.getMatakuliah(id);
     }
 
 
     @GET
-    @Path("/get-all")
+    @Path("/get-all/")
     @Transactional
     public List<MatakuliahBody> getAllMatkul() {
         return matakuliahHandler.getAllMatkulTable();
@@ -39,13 +41,14 @@ public class MatakuliahController {
         return matakuliahHandler.updateMatkulTable(body);
     }
 
-    @GET
+    @POST
     @Path("/create")
+    @Transactional
     public MatakuliahBody createMatkul(MatakuliahBody body) {
         return matakuliahHandler.createMatkulTable(body);
     }
 
-    @GET
+    @DELETE
     @Path("/delete/{id}")
     @Transactional
     public void deleteMatakuliah(@PathParam("id") long id){

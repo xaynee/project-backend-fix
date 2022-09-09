@@ -6,10 +6,10 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import com.bayu.service.general.harisma.entity.DosenTable;
 import com.bayu.service.general.harisma.model.body.DosenBody;
@@ -21,7 +21,8 @@ public class DosenController {
     DosenHandler dosenHandler;
 
     @GET
-    public List<DosenBody> getDosen(@QueryParam long id) {
+    @Path("/get/{id}")
+    public List<DosenBody> getDosen(@PathParam("id") long id) {
         return dosenHandler.getDosen(id);
     }
 
@@ -39,8 +40,9 @@ public class DosenController {
         return dosenHandler.updateDosenTable(body);
     }
 
-    @GET
+    @POST
     @Path("/create")
+    @Transactional
     public DosenBody createDosen(DosenBody body) {
         return dosenHandler.createDosenTable(body);
     } 

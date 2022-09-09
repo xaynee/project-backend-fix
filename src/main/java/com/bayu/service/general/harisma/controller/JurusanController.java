@@ -6,10 +6,10 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import com.bayu.service.general.harisma.entity.JurusanTable;
 import com.bayu.service.general.harisma.model.body.JurusanBody;
@@ -22,7 +22,8 @@ public class JurusanController {
 
 
     @GET
-    public List<JurusanBody> getJurusan(@QueryParam long id){
+    @Path("/get/{id}")
+    public List<JurusanBody> getJurusan(@PathParam("id") long id){
         return jurusanHandler.getJurusan(id);
     }
 
@@ -40,8 +41,9 @@ public class JurusanController {
         return jurusanHandler.updateJurusanTable(body);
     }
 
-    @GET
+    @POST
     @Path("/create")
+    @Transactional
     public JurusanBody createJurusan(JurusanBody body){
         return jurusanHandler.createJurusanTable(body);
     }
