@@ -3,6 +3,8 @@ package com.surya.service.general.harisma.entity;
 import java.util.List;
 import java.util.Optional;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,4 +45,6 @@ public class MahasiswaTable extends PanacheEntityBase{
     public static List<MahasiswaTable> getAllData(){
         return MahasiswaTable.listAll();
     }
+
+    
 }
