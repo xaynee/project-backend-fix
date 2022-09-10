@@ -12,12 +12,15 @@ public class MatakuliahBody {
     private String namaMatakuliah;
     private Long idMatakuliah;
     private Long idDosen;
+    private Long idJadwal;
 
     public static MatakuliahBody fromMatakuliahTable(MatakuliahTable ent) {
         var output =  new MatakuliahBody();
         output.setSks(ent.sks);
         output.setNamaMatakuliah(ent.namaMatakuliah);
         output.setIdMatakuliah(ent.idMatakuliah);
+        output.setIdDosen(ent.idDosen);
+        output.setIdJadwal(ent.idJadwal);
         return output;
     }
 

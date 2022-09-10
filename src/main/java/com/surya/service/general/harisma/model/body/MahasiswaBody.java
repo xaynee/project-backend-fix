@@ -23,6 +23,7 @@ public class MahasiswaBody {
         output.setJenisKelamin(ent.jenisKelamin);
         output.setNoTelp(ent.noTelp);
         output.setAlamat(ent.alamat);
+        output.setIdJurusan(ent.idJurusan);
         return output;
     }
 

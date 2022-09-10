@@ -30,6 +30,9 @@ public class MatakuliahTable extends PanacheEntityBase {
     @Column(name = "id_Dosen")
     public Long idDosen;
 
+    @Column(name = "id_jadwal")
+    public Long idJadwal;
+
 
     public static Optional<MatakuliahTable> findById(long id) {
         return find("id = ?1", id).firstResultOptional();
