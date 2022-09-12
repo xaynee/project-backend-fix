@@ -1,14 +1,19 @@
 package com.surya.service.general.harisma.entity;
 
+import com.surya.service.general.harisma.entity.MatakuliahTable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -18,7 +23,6 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 public class MahasiswaTable extends PanacheEntityBase{
     
     @Id
-
     @GeneratedValue(generator = "dimata_id_gen")
     @Column(name = "id_mahasiswa")
     public Long idMahasiswa;
@@ -45,6 +49,5 @@ public class MahasiswaTable extends PanacheEntityBase{
     public static List<MahasiswaTable> getAllData(){
         return MahasiswaTable.listAll();
     }
-
     
 }
